@@ -1,8 +1,8 @@
 import { Image, StyleSheet, SafeAreaView, Text, Pressable, Button, FlatList, View } from "react-native";
 import { useSpotifyAuth } from "./utils";
-import { Themes } from "./assets/Themes";
-import { Images } from "./assets/Images/images.js";
-import { Song } from "./Song"
+import { Themes, Images } from "./assets/Themes";
+import millisToMinutesAndSeconds from './utils/millisToMinutesAndSeconds';
+import Song from "./Song"
 
 export default function App() {
   // Pass in true to useSpotifyAuth to use the album ID (in env.js) instead of top tracks
@@ -12,36 +12,42 @@ export default function App() {
   const SpotifyAuthToken = () => {
     return (
       <Pressable style={styles.connectButton} onPress={getSpotifyAuth}>
-        {/* <Image style={styles.image} source={Images.spotify}/> */}
+        <Image style={styles.image} source={Images.spotify} />
         <Text style={styles.paragraph}>CONNECT WITH SPOTIFY</Text>
       </Pressable>
-    )
+    );
   }
 
 
   const Content = () => {
+
     console.log(tracks);
 
-    const renderSongItem = ({item}) => (
+    const renderSongItem = ({ item, index }) => (
       <Song
+        index={index+1}
         name={item.name}
+        url={item.album.images[0].url}
+        artists={item.artists[0].name}
+        album={item.album.name}
+        time={millisToMinutesAndSeconds(item.duration_ms)}
       />
     );
 
     return (
       <View style={styles.topTracks}>
         <View style={styles.header}>
-          {/* <Image style={styles.image} source={Images} /> */}
+          <Image style={styles.image} source={Images.spotify} />
           <Text style={styles.headerTitle}>My Top Tracks</Text>
         </View>
 
-      <FlatList
-        data={tracks}
-        renderItem={(item) => renderSongItem}
-        keyExtractor={(item) => item.id}
-      />
+        <FlatList
+          data={tracks}
+          renderItem={(item) => renderSongItem(item)}
+          keyExtractor={(item) => item.id}
+        />
       </View>
-    )
+    );
   }
 
   /* DISPLAY 1 OF 2 SCREENS */
@@ -70,18 +76,26 @@ const styles = StyleSheet.create({
     color: 'white',
     fontWeight: 'bold'
   },
+  topTracks: {
+    width: "100%",
+    height: "100%",
+    alignItems: 'center'
+  },
   connectButton: {
     flexDirection: 'row',
     backgroundColor: Themes.colors.spotify,
     padding: 20,
+    alignItems: 'center',
     borderRadius: 99999
   },
   image: {
-    width: '40%',
-    height: '40%'
+    width: 30,
+    height: 30,
+    marginRight: 10
   },
   header: {
-    flexDirection: 'column'
+    flexDirection: 'row',
+    padding: '2%'
   },
   headerTitle: {
     color: 'white',

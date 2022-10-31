@@ -9,10 +9,10 @@ export default function Song({ name, index, url, artists, album, time}) {
             <Image style={styles.image} source={{uri:url}} />
 
             <View style={styles.titleSection}>
-              <Text style={styles.name} numberofLines={1}>{name}</Text>
-              <Text style={styles.artists} numberofLines={1} >{artists}</Text>
+              <Text style={styles.name} numberOfLines={1}>{name}</Text>
+              <Text style={styles.artists} numberOfLines={1} >{artists}</Text>
             </View>
-            <Text style={styles.album} numberofLines={1}>{album}</Text>
+            <Text style={styles.album} numberOfLines={1}>{album}</Text>
             
             <Text style={styles.time}>{time}</Text> 
         </View>
@@ -42,12 +42,13 @@ const styles = StyleSheet.create({
       flexDirection: 'column',
       justifyContent: 'center',
       flex: 6,
-      padding: '2%'
+      padding: '2%',
+      width: '30%'
     },
     name: {
       fontSize: 18,
       color: Themes.colors.white,
-      justifyContent: 'flex-start'
+      justifyContent: 'flex-start',
     },
     artists: {
       color: Themes.colors.gray

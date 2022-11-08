@@ -1,3 +1,4 @@
+import { Themes } from "./assets/Themes";
 import MainScreen from "./MainScreen";
 import NextScreen from './NextScreen';
 import { createStackNavigator } from '@react-navigation/stack';
@@ -12,10 +13,35 @@ export default function App() {
         <Stack.Screen
           name="Main screen"
           component={MainScreen}
-          options={{ headerShown: false }}
+          options={{ 
+            headerShown: false,
+            title: 'Back',
+          }}
         />
-        <Stack.Screen name="Song details" component={NextScreen} />
-        <Stack.Screen name="Song preview" component={NextScreen} />
+        <Stack.Screen 
+          name="Song details" 
+          component={NextScreen} 
+          options={{ 
+            headerStyle: {
+              backgroundColor: Themes.colors.background,
+            },
+            headerTitleStyle: {
+              color: 'white'
+            }
+         }}
+        />
+        <Stack.Screen 
+          name="Song preview" 
+          component={NextScreen} 
+          options={{ 
+            headerStyle: {
+              backgroundColor: Themes.colors.background,
+            },
+            headerTitleStyle: {
+              color: 'white'
+            }
+         }}
+        />
       </Stack.Navigator>
     </NavigationContainer>
   );

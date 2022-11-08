@@ -25,7 +25,7 @@ export default function Main({navigation}) {
         );
     }
 
-    const Content = ({navigation}) => {
+    const Content = () => {
         const renderSongItem = ({ item, index }) => (
             <Song
                 index={index+1}
@@ -66,7 +66,7 @@ export default function Main({navigation}) {
   
     return (
       <SafeAreaView style={styles.container}>
-          <Text style={{color: 'white'}}>{contentDisplayed}</Text>
+          <Text>{contentDisplayed}</Text>
       </SafeAreaView>
     );
   }

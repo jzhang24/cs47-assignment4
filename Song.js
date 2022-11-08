@@ -11,7 +11,7 @@ export default function Song({ name, index, url, artists, album, time, external_
       onPress={() => navigation.navigate("Song details", { webview: external_urls })}
     >       
         <View style={styles.container}>
-          <Pressable
+          <Pressable style={styles.pressable}
             onPress={(e) => {
               e.stopPropagation();
               navigation.navigate("Song preview", { webview: preview_url });
